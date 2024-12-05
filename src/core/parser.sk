@@ -278,6 +278,7 @@ namespace GLSLX.Parser {
     "GL_EXT_frag_depth": 0,
     "GL_EXT_draw_buffers": 0,
     "GL_EXT_shader_texture_lod": 0,
+    "GL_EXT_blend_func_extended": 0,
   }
 
   def parseExtension(context ParserContext) Node {

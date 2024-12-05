@@ -786,6 +786,10 @@ import {
     vec4 textureCubeGradEXT(samplerCube sampler, vec3 P, vec3 dPdx, vec3 dPdy);
     vec4 textureCubeLodEXT(samplerCube sampler, vec3 coord, float lod);
   }
+
+  #extension GL_EXT_blend_func_extended {
+    vec4 gl_SecondaryFragColorEXT;
+  }
 }
 "
 }

@@ -613,6 +613,32 @@ void main() {
 }
 ").renameAll.trimSymbols
 
+# Test that extensions are merged
+test("
+export void foo() {
+  gl_FragColor = dFdx(gl_FragCoord);
+  gl_SecondaryFragColorEXT = gl_FragCoord;
+}
+
+export void bar() {
+  gl_FragColor = gl_FragCoord;
+}
+", "
+[foo]
+#extension GL_OES_standard_derivatives : enable
+#extension GL_EXT_blend_func_extended : enable
+
+void main() {
+  gl_FragColor = dFdx(gl_FragCoord);
+  gl_SecondaryFragColorEXT = gl_FragCoord;
+}
+
+[bar]
+void main() {
+  gl_FragColor = gl_FragCoord;
+}
+").renameAll.trimSymbols
+
 # Don't merge variables with different flags
 test("
 void main() {
