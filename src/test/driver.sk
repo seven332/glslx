@@ -52,6 +52,11 @@ namespace GLSLX.Tests {
       return self
     }
 
+    def renameMapping(mapping StringMap<string>) CompilerTest {
+      _options.renameMapping = mapping
+      return self
+    }
+
     def trimSymbols CompilerTest {
       _options.trimSymbols = true
       return self

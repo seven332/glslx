@@ -545,6 +545,36 @@ void main() {
 }
 ").renameAll.trimSymbols
 
+# Test rename mapping
+test("
+export void foo() {
+  vec4 bar = gl_FragCoord;
+  gl_FragColor = bar;
+}
+", "
+void main() {
+  vec4 b = gl_FragCoord;
+  gl_FragColor = b;
+}
+").renameAll.renameMapping({"bar": "b"}).trimSymbols
+
+# Test rename mapping conflicts
+test("
+export void foo() {
+  vec4 bar = gl_FragCoord;
+  vec4 baz = bar;
+  vec4 qux = baz;
+  gl_FragColor = qux;
+}
+", "
+void main() {
+  vec4 b = gl_FragCoord;
+  vec4 a = b;
+  vec4 c = a;
+  gl_FragColor = c;
+}
+").renameAll.renameMapping({"bar": "b"}).trimSymbols
+
 # Test implicit extensions
 test("
 export void foo() {

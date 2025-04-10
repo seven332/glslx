@@ -43,6 +43,9 @@ Advanced:
   --renaming=MODE
     Valid modes are all, internal-only, or none. Defaults to all.
 
+  --rename-mapping=old1:new1,old2:new2,...
+    Rename symbols from old1 to new1, old2 to new2, etc. Only works if renaming is enabled.
+
   --keep-symbols
     Don't inline constants or remove unused symbols.
 ")
@@ -513,6 +516,16 @@ Advanced:
               process.exit(1)
             }
             options.renameSymbols = renameSymbols[text]
+          }
+
+          else if arg.startsWith("--rename-mapping=") {
+            var text = arg.slice("--rename-mapping=".count)
+            for pair in text.split(",") {
+              var parts = pair.split(":")
+              if parts.count == 2 {
+                options.renameMapping[parts[0]] = parts[1]
+              }
+            }
           }
 
           else {

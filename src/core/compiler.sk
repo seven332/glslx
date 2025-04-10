@@ -17,6 +17,7 @@ namespace GLSLX {
     var compactSyntaxTree = true
     var removeWhitespace = true
     var renameSymbols = RenameSymbols.ALL
+    var renameMapping StringMap<string> = {}
     var trimSymbols = true
     var fileAccess fn(string, string) Source = null
   }
